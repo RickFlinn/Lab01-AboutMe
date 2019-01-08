@@ -4,6 +4,11 @@ namespace AboutMe
 {
     class Program
     {
+        /* Uses the console to ask the user a series of questions about me, takes in user input through the console, and compares
+         *    the user's responses to a set of answers for each question, and tracks the number of times they have guessed 
+         *    questions correctly. After all questions have been asked, the user is given a message telling them what their
+         *    final score is out of the total possible, as well as a brief piece of feedback.
+        */
         static void Main(string[] args)
         {
             string[] questions =
@@ -22,6 +27,9 @@ namespace AboutMe
             Console.WriteLine(UserScoreMessage(score, questions.Length));
         }
 
+        // Takes in arrays of questions and answers, respectively. For each question/answer pair, this method
+        //   calls the QuestionUser method to determine if the user guessed correctly. A counter tracks how many questions
+        //   the user has answered correctly. After all questions have been asked, returns the number of correct guesses.
         public static int AskQuestions(string[] questions, string[] answers)
         {
             int score = 0;
@@ -36,7 +44,7 @@ namespace AboutMe
                 }
             } catch (IndexOutOfRangeException xcept)
             {
-                Console.WriteLine("Whoops! Looks like there's an unequal number of questions and answers.");
+                Console.WriteLine("Whoops! Looks like there probably aren't enough answers matched to my questions.");
                 Console.WriteLine(xcept.Message);
             }
             catch (Exception xcept)
@@ -47,7 +55,7 @@ namespace AboutMe
         }
 
         // Takes in question and answer string as parameters, prints the question to the console, and then
-        //   checks user console input against the answer string. If the user guessed correctly, returns true; 
+        //   checks user console input against the correct answer. If the user guessed correctly, returns true; 
         //   otherwise, returns false.
         // For yes or no questions, if the user inputs "true"/"y", or "false"/"n", their answer will be converted 
         //   to a "yes" or "no", respectively.
