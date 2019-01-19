@@ -22,9 +22,19 @@ namespace AboutMe
 
             Console.WriteLine("Here, have some generic questions about me!");
 
-            int score = AskQuestions(questions, answers);
 
-            Console.WriteLine(UserScoreMessage(score, questions.Length));
+            int score = 0;
+            try
+            {
+                score = AskQuestions(questions, answers);
+            } catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            } finally
+            {
+                Console.WriteLine(UserScoreMessage(score, questions.Length));
+            }
+
         }
 
         // Takes in arrays of questions and answers, respectively. For each question/answer pair, this method
@@ -45,11 +55,12 @@ namespace AboutMe
             } catch (IndexOutOfRangeException xcept)
             {
                 Console.WriteLine("Whoops! Looks like there probably aren't enough answers matched to my questions.");
-                Console.WriteLine(xcept.Message);
+                throw xcept;
             }
             catch (Exception xcept)
             {
                 Console.WriteLine(xcept.Message);
+                throw xcept;
             }
             return score;
         }
